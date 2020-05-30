@@ -24,7 +24,7 @@
         "methods": [
           "get"
         ],
-        "route": "run-puppetter.js"
+        "route": "run-puppeteer"
       },
       {
         "type": "http",
