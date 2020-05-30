@@ -8,7 +8,7 @@
         "methods": [
           "get"
         ],
-        "route": "hoge"
+        "route": "run-puppeteer"
       },
       {
         "type": "http",
