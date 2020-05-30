@@ -37,8 +37,17 @@ if(process.env.AWS_LAMBDA_FUNCTION_VERSION){
   run(puppeteer,{},URL).then(res => console.log(res));
 }
 
-module.exports = async (req, res) => {
-  const { URL='https://twitter.com/n0bisuke' } = req.query;
-  const dimensions = await run(puppeteer, chrome, URL);
-  res.send(`${URL}のページタイトルは「${dimensions.title}」だよー!`);
-}
+module.exports = async function (context, req) {
+  const id = JSON.stringify(process.env);
+  context.res = {
+    body: { 
+      text: `Hello from the API ${id}`
+    }
+  };
+};
+
+// module.exports = async (req, res) => {
+  // const { URL='https://twitter.com/n0bisuke' } = req.query;
+  // const dimensions = await run(puppeteer, chrome, URL);
+  // res.send(`${URL}のページタイトルは「${dimensions.title}」だよー!`);
+// }
