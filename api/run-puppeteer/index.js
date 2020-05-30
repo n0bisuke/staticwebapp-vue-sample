@@ -37,17 +37,18 @@ if(process.env.WEBSITE_FUNCTIONS_ARMCACHE_ENABLED){
   run(puppeteer,{},URL).then(res => console.log(res));
 }
 
-// module.exports = async function (context, req) {
-//   const id = JSON.stringify(process.env);
-//   context.res = {
-//     body: { 
-//       text: `Hello from the API ${id}`
-//     }
-//   };
-// };
-
-module.exports = async (req, res) => {
+module.exports = async function (context, req) {
   const { URL='https://twitter.com/n0bisuke' } = req.query;
   const dimensions = await run(puppeteer, chrome, URL);
-  res.send(`${URL}のページタイトルは「${dimensions.title}」だよー!`);
-}
+  context.res = {
+    body: { 
+      text: `${URL}のページタイトルは「${dimensions.title}」だよー!`
+    }
+  };
+};
+
+// module.exports = async (req, res) => {
+//   const { URL='https://twitter.com/n0bisuke' } = req.query;
+//   const dimensions = await run(puppeteer, chrome, URL);
+//   res.send(`${URL}のページタイトルは「${dimensions.title}」だよー!`);
+// }
